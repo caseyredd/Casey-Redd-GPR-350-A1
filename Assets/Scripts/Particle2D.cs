@@ -1,22 +1,32 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Particle2D : MonoBehaviour
 {
-    Vector3 vec1(1, 2, 3);
-    Vector3 vec2(2, 3, 4);
-    Vector3 vec3 = vec1 + vec2;
-    std::cout << vec3 << std::endl;
-  std::cout << vec3 - vec1 << std::endl;
-  std::cout << vec3 + Vector3::Zero << std::endl;
+    void Start()
+    {
+        Vector3 initLoc = gameObject.pos;
+        Vector3 moveLoc = gameObject.pos;
+        Vector3 vel = gameObject.pos;
+    }
 
-  std::cout << vec3.Dot(Vector3::Zero) << std::endl;
-  std::cout << vec1.Dot(vec2) << std::endl;
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Vector3 initLoc = Input.mousePosition;
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            Vector3 moveLoc = Input.mousePosition;
+            Vector3 vel = moveLoc - initLoc;
+        }
+    }
 
-  std::cout << Vector3::Zero.Magnitude() << std::endl;
+    void FixedUpdate()
+    {
+        gameObject.GetComponent<Integrator>.Integrate(Vector3 vel, Vector3 moveLoc);
+    }
 
-  std::cout << vec1.Magnitude() << std::endl;
-
-  std::cout << vec1* 2 << std::endl;
-
-  std::cout << vec1 / 2 << std::endl;
 }
