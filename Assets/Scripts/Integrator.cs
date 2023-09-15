@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Integrator : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -15,11 +16,16 @@ public class Integrator : MonoBehaviour
     {
         
     }
-    static void Integrate(Vector3 vel, Vector3 movePos)
+    static public void Integrate(Vector3 vel, GameObject obj)
     {
-        if (gameObject.transform.pos != movePos)
+        if (obj.transform.position != obj.GetComponent<Particle2D>().moveLoc)
         {
-            transform.pos = gameObject.transform.position + vel * Time.deltaTime;
+            obj.transform.position = obj.transform.position + vel * Time.deltaTime;
+        }
+        if (obj.transform.position == obj.GetComponent<Particle2D>().moveLoc)
+        {
+            Destroy(obj);
         }
     }
+
 }

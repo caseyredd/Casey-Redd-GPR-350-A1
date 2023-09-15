@@ -4,29 +4,25 @@ using UnityEngine;
 
 public class Particle2D : MonoBehaviour
 {
+    public Vector3 force = Vector3.zero;
+    public Vector3 acc = Vector3.zero;
+    public Vector3 Damping = Vector3.Normalize(Vector3.zero);
+    public Vector3 initLoc;
+    public Vector3 moveLoc;
+    public Vector3 vel;
     void Start()
     {
-        Vector3 initLoc = gameObject.pos;
-        Vector3 moveLoc = gameObject.pos;
-        Vector3 vel = gameObject.pos;
+
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Vector3 initLoc = Input.mousePosition;
-        }
-        if (Input.GetMouseButtonUp(0))
-        {
-            Vector3 moveLoc = Input.mousePosition;
-            Vector3 vel = moveLoc - initLoc;
-        }
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0);
     }
 
     void FixedUpdate()
     {
-        gameObject.GetComponent<Integrator>.Integrate(Vector3 vel, Vector3 moveLoc);
+        Integrator.Integrate(vel, gameObject);
     }
 
 }
